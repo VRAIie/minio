@@ -1,3 +1,12 @@
+> [!NOTE]
+> **THIS REPOSITORY IS NO LONGER MAINTAINED.**
+>
+> **Alternatives:**
+> - **[AIStor Free](https://min.io/download)** — Full-featured, standalone edition for community use (free license)
+> - **[AIStor Enterprise](https://min.io/pricing)** — Distributed edition with commercial support
+
+---
+
 # MinIO Quickstart Guide
 
 [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Docker Pulls](https://img.shields.io/docker/pulls/minio/minio.svg?maxAge=604800)](https://hub.docker.com/r/minio/minio/) [![license](https://img.shields.io/badge/license-AGPL%20V3-blue)](https://github.com/minio/minio/blob/master/LICENSE)
@@ -21,7 +30,7 @@ We designed MinIO as Open Source software for the Open Source software community
 All usage of MinIO in your application stack requires validation against AGPLv3 obligations, which include but are not limited to the release of modified code to the community from which you have benefited. Any commercial/proprietary usage of the AGPLv3 software, including repackaging or reselling services/features, is done at your own risk.
 
 The AGPLv3 provides no obligation by any party to support, maintain, or warranty the original or any modified work.
-All support is provided on a best-effort basis through Github and our [Slack](https//slack.min.io) channel, and any member of the community is welcome to contribute and assist others in their usage of the software.
+All support is provided on a best-effort basis through Github and our [Slack](https://slack.min.io) channel, and any member of the community is welcome to contribute and assist others in their usage of the software.
 
 MinIO [AIStor](https://www.min.io/product/aistor) includes enterprise-grade support and licensing for workloads which require commercial or proprietary usage and production-level SLA/SLO-backed support. For more information, [reach out for a quote](https://min.io/pricing).
 
@@ -41,6 +50,7 @@ See the sections below for detailed instructions on each method.
 ### Legacy Binary Releases
 
 Historical pre-compiled binary releases remain available for reference but are no longer maintained:
+
 - GitHub Releases: https://github.com/minio/minio/releases
 - Direct downloads: https://dl.min.io/server/minio/release/
 
@@ -59,7 +69,7 @@ You can alternatively run `go build` and use the `GOOS` and `GOARCH` environment
 For example:
 
 ```
-env GOOS=linux GOARCh=arm64 go build
+env GOOS=linux GOARCH=arm64 go build
 ```
 
 Start MinIO by running `minio server PATH` where `PATH` is any empty folder on your local filesystem.
@@ -77,11 +87,11 @@ mc admin info local
 ```
 
 See [Test using MinIO Client `mc`](#test-using-minio-client-mc) for more information on using the `mc` commandline tool.
-For application developers, see <https://docs.min.io/community/minio-object-store/developers/minio-drivers.html> to view MinIO SDKs for supported languages.
+For application developers, see <https://docs.min.io/enterprise/aistor-object-store/developers/sdk/> to view MinIO SDKs for supported languages.
 
 > [!NOTE]
 > Production environments using compiled-from-source MinIO binaries do so at their own risk.
-> The AGPLv3 license provides no warranties nor liabilites for any such usage.
+> The AGPLv3 license provides no warranties nor liabilities for any such usage.
 
 ## Build Docker Image
 
@@ -102,7 +112,7 @@ docker run -p 9000:9000 -p 9001:9001 myminio:minio server /tmp/minio --console-a
 ```
 
 Complete documentation for building Docker containers, managing custom images, or loading images into orchestration platforms is out of scope for this documentation.
-You can modify the `Dockerfile` and `dockerscripts/socker-entrypoint.sh` as-needed to reflect your specific image requirements.
+You can modify the `Dockerfile` and `dockerscripts/docker-entrypoint.sh` as-needed to reflect your specific image requirements.
 
 See the [MinIO Container](https://docs.min.io/community/minio-object-store/operations/deployments/baremetal-deploy-minio-as-a-container.html#deploy-minio-container) documentation for more guidance on running MinIO within a Container image.
 
@@ -147,7 +157,7 @@ Follow the MinIO Client [Quickstart Guide](https://docs.min.io/community/minio-o
 - [The MinIO documentation website](https://docs.min.io/community/minio-object-store/index.html)
 - [MinIO Erasure Code Overview](https://docs.min.io/community/minio-object-store/operations/concepts/erasure-coding.html)
 - [Use `mc` with MinIO Server](https://docs.min.io/community/minio-object-store/reference/minio-mc.html)
-- [Use `minio-go` SDK with MinIO Server](https://docs.min.io/community/minio-object-store/developers/go/minio-go.html)
+- [Use `minio-go` SDK with MinIO Server](https://docs.min.io/enterprise/aistor-object-store/developers/sdk/go/)
 
 ## Contribute to MinIO Project
 
