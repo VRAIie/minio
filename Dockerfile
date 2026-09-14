@@ -1,12 +1,20 @@
-FROM minio/minio:latest
+# ---- build stage ----
+FROM golang:1.24-bookworm AS build
+ARG MINIO_RELEASE=RELEASE.2025-09-07T16-13-09Z
+ARG TARGETARCH
 
-RUN chmod -R 777 /usr/bin
+RUN git clone --branch ${MINIO_RELEASE} \
+    https://github.com/minio/minio.git /src
+WORKDIR /src
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} \
+    go build -tags kqueue -trimpath \
+    --ldflags "$(go run buildscripts/gen-ldflags.go)" \
+    -o /out/minio .
 
-COPY ./minio /usr/bin/minio
-COPY dockerscripts/docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
-
-ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
-
-VOLUME ["/data"]
-
-CMD ["minio"]
+# ---- runtime stage ----
+FROM debian:bookworm-slim
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+COPY --from=build /out/minio /usr/bin/minio
+ENTRYPOINT ["minio"]
